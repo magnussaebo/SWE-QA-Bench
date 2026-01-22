@@ -7,7 +7,7 @@ from typing import Dict, Any, Optional
 
 from dotenv import load_dotenv
 load_dotenv()
-PROJECT_ROOT = Path(__file__).parent.parent.parent
+PROJECT_ROOT = Path(__file__).parent.parent  # SWE-QA-Bench/SWE-QA-Bench/
 
 from openai import OpenAI
 
@@ -159,7 +159,7 @@ def evaluate_jsonl_parallel(candidate_jsonl_path, reference_jsonl_path, output_j
             try:
                 record = json.loads(line)
                 question = record.get("question", "")
-                answer = record.get("aggregated_answer", "")
+                answer = record.get("answer", "") or record.get("aggregated_answer", "")
                 if question and answer:
                     reference_dict[question] = answer
             except Exception as e:
