@@ -225,27 +225,65 @@ if __name__ == "__main__":
         'xarray',
     ]
     # Set paths
-    candidate_base_path = PROJECT_ROOT / "datasets" / "answers" / os.getenv("MODEL") / os.getenv("METHOD")
+    # SUPER = parent dir (e.g., gpt_4_1_mini), SUB = method dir (e.g., step_48_multi)
+    super_dir = os.getenv("SUPER")
+    sub_dir = os.getenv("SUB")
+    candidate_base_path = PROJECT_ROOT / "datasets" / "answers" / super_dir / sub_dir
     reference_base_path = PROJECT_ROOT / "datasets" / "reference"
-    output_base_path = PROJECT_ROOT / "datasets" / "scores" / os.getenv("MODEL") / os.getenv("METHOD")
-    
-    for repo in repos:
-        candidate_path = f"{candidate_base_path}/{repo}.jsonl"
-        reference_path = f"{reference_base_path}/{repo}.jsonl"
-        output_path = f"{output_base_path}/{repo}.jsonl"
-        
-        print(f"\nStarting to process {repo}...")
-        print(f"Candidate answer path: {candidate_path}")
-        print(f"Reference answer path: {reference_path}")
-        print(f"Output path: {output_path}")
-        
-        # Check if files exist
-        if not os.path.exists(candidate_path):
-            print(f"Skipping {repo}: Candidate answer file does not exist")
-            continue
-        if not os.path.exists(reference_path):
-            print(f"Skipping {repo}: Reference answer file does not exist")
-            continue
-        # Use parallel processing
-        evaluate_jsonl_parallel(candidate_path, reference_path, output_path, max_workers=16)
-        print(f"Completed processing {repo}")
+    output_base_path = PROJECT_ROOT / "datasets" / "scores" / super_dir / sub_dir
+
+    # Check for multi-trajectory structure (traj_N subdirectories)
+    traj_subdirs = sorted([d for d in candidate_base_path.iterdir() if d.is_dir() and d.name.startswith("traj_")]) if candidate_base_path.exists() else []
+
+    if traj_subdirs:
+        # Multi-trajectory mode: process each traj_N/ subdirectory
+        print(f"Detected multi-trajectory structure: {[d.name for d in traj_subdirs]}")
+
+        for traj_subdir in traj_subdirs:
+            traj_name = traj_subdir.name  # 'traj_1', 'traj_2', etc.
+            print(f"\n{'='*60}")
+            print(f"Processing {traj_name}")
+            print(f"{'='*60}")
+
+            for repo in repos:
+                candidate_path = traj_subdir / f"{repo}.jsonl"
+                reference_path = reference_base_path / f"{repo}.jsonl"
+                output_path = output_base_path / traj_name / f"{repo}.jsonl"
+
+                print(f"\nStarting to process {repo} ({traj_name})...")
+                print(f"Candidate answer path: {candidate_path}")
+                print(f"Reference answer path: {reference_path}")
+                print(f"Output path: {output_path}")
+
+                # Check if files exist
+                if not candidate_path.exists():
+                    print(f"Skipping {repo}: Candidate answer file does not exist")
+                    continue
+                if not reference_path.exists():
+                    print(f"Skipping {repo}: Reference answer file does not exist")
+                    continue
+                # Use parallel processing
+                evaluate_jsonl_parallel(str(candidate_path), str(reference_path), str(output_path), max_workers=16)
+                print(f"Completed processing {repo} ({traj_name})")
+    else:
+        # Single trajectory mode (original behavior)
+        for repo in repos:
+            candidate_path = f"{candidate_base_path}/{repo}.jsonl"
+            reference_path = f"{reference_base_path}/{repo}.jsonl"
+            output_path = f"{output_base_path}/{repo}.jsonl"
+
+            print(f"\nStarting to process {repo}...")
+            print(f"Candidate answer path: {candidate_path}")
+            print(f"Reference answer path: {reference_path}")
+            print(f"Output path: {output_path}")
+
+            # Check if files exist
+            if not os.path.exists(candidate_path):
+                print(f"Skipping {repo}: Candidate answer file does not exist")
+                continue
+            if not os.path.exists(reference_path):
+                print(f"Skipping {repo}: Reference answer file does not exist")
+                continue
+            # Use parallel processing
+            evaluate_jsonl_parallel(candidate_path, reference_path, output_path, max_workers=16)
+            print(f"Completed processing {repo}")

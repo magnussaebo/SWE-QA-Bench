@@ -1,0 +1,10 @@
+Scores from /home/magnus/SWE-QA-Bench/SWE-QA-Bench/datasets/scores/gpt-4.1-mini/step_48_traj_1
+Total records: 48
+Empty answers (scored as 0): 0
+
+correctness     mean=8.65  std=0.79
+completeness    mean=7.17  std=1.19
+relevance       mean=9.83  std=0.38
+clarity         mean=8.85  std=0.41
+reasoning       mean=8.65  std=0.67
+total_score     mean=43.15  std=2.93
