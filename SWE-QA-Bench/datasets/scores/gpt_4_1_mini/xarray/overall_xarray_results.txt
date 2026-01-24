@@ -1,0 +1,26 @@
+Overall Results for xarray
+Base path: datasets/scores/gpt_4_1_mini/xarray
+Trajectories: 3
+============================================================
+
+Per-Trajectory Summary:
+------------------------------------------------------------
+Trajectory   Records  Empty  Correctness  Total Score 
+------------------------------------------------------------
+traj_1       48       0      7.48         39.71       
+traj_2       48       0      7.33         39.73       
+traj_3       48       0      7.46         40.06       
+
+
+Aggregate Across All Trajectories:
+------------------------------------------------------------
+Total records across all trajectories: 144
+Total empty answers: 0
+
+Mean of trajectory means:
+  correctness     mean=7.42  std=0.08
+  completeness    mean=5.93  std=0.04
+  relevance       mean=9.56  std=0.05
+  clarity         mean=9.10  std=0.02
+  reasoning       mean=7.83  std=0.09
+  total_score     mean=39.83  std=0.20

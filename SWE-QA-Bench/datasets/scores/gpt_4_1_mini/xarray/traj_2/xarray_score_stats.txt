@@ -1,0 +1,10 @@
+Scores for traj_2
+Total records: 48
+Empty answers (scored as 0): 0
+
+correctness     mean=7.33  std=1.94
+completeness    mean=5.90  std=1.85
+relevance       mean=9.56  std=1.07
+clarity         mean=9.08  std=0.68
+reasoning       mean=7.85  std=1.47
+total_score     mean=39.73  std=6.04
