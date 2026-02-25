@@ -1,0 +1,10 @@
+Scores for traj_3
+Total records: 48
+Empty answers (scored as 0): 0
+
+correctness     mean=7.98  std=1.52
+completeness    mean=6.56  std=1.69
+relevance       mean=9.83  std=0.38
+clarity         mean=9.27  std=0.45
+reasoning       mean=8.38  std=0.91
+total_score     mean=42.02  std=4.07

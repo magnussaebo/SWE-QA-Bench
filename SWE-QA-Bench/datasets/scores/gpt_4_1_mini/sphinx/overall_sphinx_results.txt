@@ -1,0 +1,26 @@
+Overall Results for sphinx
+Base path: datasets/scores/gpt_4_1_mini/sphinx
+Trajectories: 3
+============================================================
+
+Per-Trajectory Summary:
+------------------------------------------------------------
+Trajectory   Records  Empty  Correctness  Total Score 
+------------------------------------------------------------
+traj_1       48       0      7.67         40.54       
+traj_2       48       0      7.54         40.29       
+traj_3       48       0      7.40         39.88       
+
+
+Aggregate Across All Trajectories:
+------------------------------------------------------------
+Total records across all trajectories: 144
+Total empty answers: 0
+
+Mean of trajectory means:
+  correctness     mean=7.53  std=0.14
+  completeness    mean=5.86  std=0.11
+  relevance       mean=9.72  std=0.08
+  clarity         mean=9.19  std=0.04
+  reasoning       mean=7.92  std=0.13
+  total_score     mean=40.24  std=0.34

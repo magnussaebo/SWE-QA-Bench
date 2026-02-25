@@ -1,0 +1,26 @@
+Overall Results for pylint
+Base path: datasets/scores/gpt_4_1_mini/pylint
+Trajectories: 3
+============================================================
+
+Per-Trajectory Summary:
+------------------------------------------------------------
+Trajectory   Records  Empty  Correctness  Total Score 
+------------------------------------------------------------
+traj_1       48       0      7.29         39.52       
+traj_2       48       0      7.69         40.92       
+traj_3       48       0      7.98         42.02       
+
+
+Aggregate Across All Trajectories:
+------------------------------------------------------------
+Total records across all trajectories: 144
+Total empty answers: 0
+
+Mean of trajectory means:
+  correctness     mean=7.65  std=0.35
+  completeness    mean=6.19  std=0.43
+  relevance       mean=9.67  std=0.17
+  clarity         mean=9.25  std=0.06
+  reasoning       mean=8.06  std=0.29
+  total_score     mean=40.82  std=1.25
